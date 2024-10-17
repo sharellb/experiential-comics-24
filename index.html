@@ -216,7 +216,7 @@ const createScene = async function () {
 
     //Load Virtual world: the "Hill Valley Scene" and configure occluders
     engine.displayLoadingUI(); //Display the loading screen as the scene takes a few seconds to load
-    const virtualWorldResult = await BABYLON.SceneLoader.ImportMeshAsync("",  Assets.meshes.cornellBox.rootUrl, Assets.meshes.cornellBox.filename, scene);
+    const virtualWorldResult = await BABYLON.SceneLoader.ImportMeshAsync("", Assets.meshes.pirateFort.rootUrl, Assets.meshes.pirateFort.filename, scene);
     engine.hideLoadingUI(); //Hide Loadingscreen once the scene is loaded
     for (let child of virtualWorldResult.meshes) {
         child.renderingGroupId = 1;
@@ -281,6 +281,14 @@ const createScene = async function () {
 
             rootOccluder.position = portalPosition;
             rootScene.position = portalPosition;
+
+            //Move virtual scene 1 unit lower (this HillValley scene is at 1 above origin - and the grass at 1.2)
+            rootScene.translate(BABYLON.Axis.Y, -1);
+            
+            //Positionate in front the car
+            rootScene.translate(BABYLON.Axis.X, 29);
+            rootScene.translate(BABYLON.Axis.Z, -11);
+
 
             //Align occluders
             rootOccluder.translate(BABYLON.Axis.Y, 3);
